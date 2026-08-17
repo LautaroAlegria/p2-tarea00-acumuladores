@@ -81,8 +81,36 @@ public class Acumuladores {
 	 * @param nColum
 	 * @return
 	 */
+	
+	private int sumaColumna(int[][] mat, int col) {
+		int suma = 0;
+		for(int fila = 0; fila < mat.length; fila++) {
+			suma += mat[fila][col];
+		}
+		return suma;
+	}
+	
+	
+	private int sumaFila(int[] lista) {
+		int suma = 0;
+		for(int i = 0; i < lista.length; i++) {
+			suma += lista[i];
+		}
+		return suma;
+	}
+	
 	public boolean algunaFilaSumaMasQueLaColumna(int[][] mat, int nColum) { 
-		throw new RuntimeException("Metodo no implementado aun!!!");
+		if(mat == null || mat.length == 0 || nColum < 0 || nColum > (mat[0].length - 1)) return false;
+		
+		int sumaColumna = sumaColumna(mat,nColum);
+		
+		boolean ret = false;
+		
+		for(int fila = 0; fila < mat.length && !ret; fila++) {
+			ret = ret || (sumaFila(mat[fila]) > sumaColumna);
+		}
+		
+		return ret;
 	}
 	
 	/**
