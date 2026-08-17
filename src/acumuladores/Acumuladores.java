@@ -1,5 +1,7 @@
 package acumuladores;
 
+import java.util.Arrays;
+
 public class Acumuladores {
 
 	/**
@@ -28,7 +30,7 @@ public class Acumuladores {
 		return ret;
 		
 	}
-	
+
 	/**
 	 * Dado 2 matrices se verifica si hay intersección entre las filas de cada
 	 * matriz, fila a fila.
@@ -40,8 +42,31 @@ public class Acumuladores {
 	 * @param mat2
 	 * @return
 	 */
+	
+	private boolean intersectaCon(int[] lista, int valor) {
+		boolean ret = false;
+		for(int i = 0; i < lista.length && !ret; i++) {
+			ret = ret || (lista[i] == valor);
+		}
+		return ret;
+	}
+	
+	
 	public boolean hayInterseccionPorFila(int[][] mat1, int[][]mat2) { 
-		throw new RuntimeException("Metodo no implementado aun!!!");
+		
+		if(mat1 == null || mat2 == null || mat1.length == 0 || mat1.length != mat2.length) return false;
+		
+		boolean ret = true;
+		for(int fila = 0; fila < mat1.length && ret; fila++){
+			boolean acum = false;
+			for(int col = 0; col < mat2[fila].length && !acum; col++) {
+				acum = acum || intersectaCon(mat1[fila], mat2[fila][col]);
+			}
+			ret = ret && acum;
+		}
+		
+		return ret;
+		
 	}
 	
 	/**
